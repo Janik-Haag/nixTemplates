@@ -1,5 +1,5 @@
 {
-  description = "changeMe";
+  description = "replaceMe";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -36,14 +36,12 @@
             buildInputs = with pkgs; [
               (pkgs.poetry2nix.mkPoetryEnv {
                 projectDir = ./.;
-
                 editablePackageSources = {
                   my-app = ./src;
                 };
               })
             ];
           };
-        }
-      )
+        });
 }
 

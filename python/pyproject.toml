@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "replaceMe"
+version = "0.1.0"
+description = ""
+authors = ["Janik H. <janik@aq0.de>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+
+[tool.poetry.scripts]
+replaceMe = 'replaceMe:main'
+
+[tool.black]
+line_length = 120
+
+[tool.isort]
+line_length = 120
+profile = "black"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
