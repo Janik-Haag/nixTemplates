@@ -13,9 +13,17 @@
         '';
       };
 
+      trivial = {
+        path = ./trivial;
+        description = "A trivial flake template";
+        welcomeText = ''
+          ToDo
+        '';
+      };
+
     };
 
-    # defaultTemplate = self.templates.trivial;
+    defaultTemplate = self.templates.trivial;
 
   };
 }
