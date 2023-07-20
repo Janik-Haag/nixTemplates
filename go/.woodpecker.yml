@@ -1,0 +1,9 @@
+pipeline:
+  run-greet:
+    image: nixos/nix
+    # https://blog.kotatsu.dev/posts/2023-04-21-woodpecker-nix-caching/
+    commands:
+      - echo 'experimental-features = flakes nix-command' >> /etc/nix/nix.conf
+      - nix run --store unix:///mnt/nix/var/nix/daemon-socket/socket?root=/mnt .#
+    volumes:
+      - /nix:/mnt/nix:ro
