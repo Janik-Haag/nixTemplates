@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     flake-utils.url = "github:numtide/flake-utils";
-    poetry2nix.url = "github:nix-community/poetry2nix";
     pre-commit-hooks.url = "github:cachix/pre-commit-hooks.nix";
   };
 
@@ -28,18 +27,24 @@
               };
             };
           };
-          defaultPackage = pkgs.poetry2nix.mkPoetryApplication {
-            projectDir = ./.;
+          defaultPackage = pkgs.python3.pkgs.buildPythonApplication {
+            pname = "replaceMe";
+            version = "0.0.1";
+            format = "pyproject";
+
+            src = ./.;
+
+            nativeBuildInputs = with pkgs; [
+              python3Packages.poetry-core
+            ];
+
+
           };
+
           devShell = pkgs.mkShell {
             inherit (self.checks.${system}.pre-commit-check) shellHook;
             buildInputs = with pkgs; [
-              (pkgs.poetry2nix.mkPoetryEnv {
-                projectDir = ./.;
-                editablePackageSources = {
-                  my-app = ./src;
-                };
-              })
+              poetry
             ];
           };
         }
